@@ -1,0 +1,28 @@
+{
+    "name": "storefront-x/magento-module-blog-graphql-extended",
+    "description": "Magento 2 module - Blog GraphQL Extension for Amasty Blog GraphQL module",
+    "type": "magento2-module",
+    "homepage": "https://github.com/storefront-x/magento-module-blog-graphql-extended",
+    "config": {
+        "sort-packages": true
+    },
+    "require": {
+        "php": "~7.3.0||~7.4.0||~8.1.0",
+        "magento/framework": "^103.0.2",
+	    "magento/module-graph-ql": "^100.4.2",
+        "amasty/blog": "^2.7.1",
+        "amasty/blog-graphql": "^1.1.1"
+    },
+    "license": [
+        "MIT"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "StorefrontX\\BlogGraphQlExtended\\": ""
+        }
+    }
+}
+

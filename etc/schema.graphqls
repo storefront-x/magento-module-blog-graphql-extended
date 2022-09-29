@@ -1,0 +1,35 @@
+type Query {
+    MxBlogTag (
+        id: Int @doc(description: "Tag ID")
+    ): AmBlogTag @resolver(class: "StorefrontX\\BlogGraphQlExtended\\Model\\Resolver\\Tag")
+}
+
+interface AmBlogPostInterface {
+    mx_categories: [AmBlogCategory!]! @doc(description: "The categories assigned to a post.")
+    mx_tags: [AmBlogTag!]! @doc(description: "The tags assigned to a post.")
+    mx_author: AmBlogAuthor! @doc(description: "The post author assigned to a post.")
+    mx_related_products: AmBlogProducts! @doc(description: "The related products to a post.")
+    mx_related_posts: AmBlogPosts! @doc(description: "The related posts to a post.")
+}
+
+interface AmBlogCategoryInterface {
+    mx_posts: [AmBlogPost!]! @doc(description: "Posts in Category.")
+}
+
+interface AmBlogTagInterface {
+    post_count: Int @doc(description: "Post Count by Tag.")
+    mx_posts: [AmBlogPost!]! @doc(description: "Posts by Tag.")
+}
+
+interface AmBlogAuthorInterface {
+    post_count: Int @doc(description: "Post Count by Author.")
+    mx_posts: [AmBlogPost] @doc(description: "Posts by Author.")
+}
+
+enum UrlRewriteEntityTypeEnum {
+    AMASTY_BLOG_POST
+    AMASTY_BLOG_CATEGORY
+    AMASTY_BLOG_TAG
+    REDIRECT_301
+    CUSTOM
+}

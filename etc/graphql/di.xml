@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\UrlRewriteGraphQl\Model\Resolver\EntityUrl">
+        <plugin name="storefrontx_url_resolver_graphql_plugin" type="StorefrontX\BlogGraphQlExtended\Plugin\UrlRewriteGraphQl\EntityUrlPlugin"/>
+    </type>
+    <type name="Amasty\BlogGraphQl\Model\Resolver\Post">
+        <plugin name="storefrontx_blog_post_graphql_plugin" type="StorefrontX\BlogGraphQlExtended\Model\Resolver\Post"/>
+    </type>
+    <type name="Amasty\BlogGraphQl\Model\Resolver\Category">
+        <plugin name="storefrontx_blog_category_graphql_plugin" type="StorefrontX\BlogGraphQlExtended\Model\Resolver\Category"/>
+    </type>
+    <type name="Amasty\BlogGraphQl\Model\Resolver\Author">
+        <plugin name="storefrontx_blog_author_graphql_plugin" type="StorefrontX\BlogGraphQlExtended\Model\Resolver\Author"/>
+    </type>
+</config>
