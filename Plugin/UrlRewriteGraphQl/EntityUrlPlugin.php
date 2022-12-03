@@ -126,11 +126,14 @@ class EntityUrlPlugin
      */
     public function afterResolve(EntityUrl $subject, $result, ...$args)
     {
+        //TODO validate reason for this plugin and priority (this plugin is aplied after cache plugin)
         $url = $args[4]['url'] ?? '';
 
         $emptyResult = [ null ];
-
-        $existingRedirect = $this->checkRedirectResponse($url);
+        /** @var \Magento\GraphQl\Model\Query\Context $context */
+        $context = $args[1];
+        $storeId = (int)$context->getExtensionAttributes()->getStore()->getId();
+        $existingRedirect = $this->checkRedirectResponse($url, $storeId);
         if ($existingRedirect && isset($existingRedirect['redirect_type'])) {
             $baseUrl = $this->getBaseUrl();
 
@@ -216,15 +219,17 @@ class EntityUrlPlugin
      * Checks if this request url is redirected
      *
      * @param string $url
+     * @param int $storeId
      *
      * @return array
      */
-    public function checkRedirectResponse(string $url): array
+    public function checkRedirectResponse(string $url, int $storeId): array
     {
         $urlRewriteCollection = $this->urlRewriteCollectionFactory->create();
         $urlRewrite = $urlRewriteCollection->addFieldToSelect(['target_path', 'url_rewrite_id', 'redirect_type'])
             ->addFieldToFilter('request_path', ['eq' => $url])
             ->addFieldToFilter('redirect_type', ['eq' => self::REDIRECT_301])
+            ->addFieldToFilter('store_id', ['in' => $storeId]) //TODO add 0 too??
             ->setPageSize(1)
             ->getFirstItem();
         return $urlRewrite->getData();
