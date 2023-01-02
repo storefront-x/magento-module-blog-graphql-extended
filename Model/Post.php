@@ -122,6 +122,7 @@ class Post
 
             // get post
             if (isset($args['id'])) {
+                $args['id'] = (int)$args['id'];
                 $post = $this->postRepository->getById($args['id']);
             } else {
                 $post = $this->postRepository->getByUrlKey($args['urlKey']);
